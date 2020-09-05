@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LGS Puan Hesaplama</title>
+  </head>
+
+  <body>
+    <table class="table table-bordered table-hover" id="tab_logic">
+      <thead>
+        <tr>
+          <th class="text-center">DERSLER</th>
+          <th class="text-center">DOĞRU SAYISI</th>
+          <th class="text-center">YANLIŞ SAYISI</th>
+          <th class="text-center">NET</th>
+          <th class="text-center">PUAN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 400;">TÜRKÇE (20)</td>
+          <td>
+            <input
+              type="number"
+              name="td"
+              placeholder="Doğru"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="ty"
+              placeholder="Yanlış"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="tnet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="tpuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 400;">MATEMATİK (20)</td>
+          <td>
+            <input
+              type="number"
+              name="md"
+              placeholder="Doğru"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="my"
+              placeholder="Yanlış"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="mnet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="mpuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 400;">
+            FEN VE TEKNOLOJİ (20)
+          </td>
+          <td>
+            <input
+              type="number"
+              name="fd"
+              placeholder="Doğru"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="fy"
+              placeholder="Yanlış"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="fnet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="fpuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 400;">
+            İNKİLAP TARİHİ (10)
+          </td>
+          <td>
+            <input
+              type="number"
+              name="ind"
+              placeholder="Doğru"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="iny"
+              placeholder="Yanlış"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="innet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="inpuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 400;">DİN KÜLTÜRÜ (10)</td>
+          <td>
+            <input
+              type="number"
+              name="dind"
+              placeholder="Doğru"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="diny"
+              placeholder="Yanlış"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="dinnet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="dinpuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 400;">YABANCI DİL (10)</td>
+          <td>
+            <input
+              type="number"
+              name="yabd"
+              placeholder="Doğru"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="yaby"
+              placeholder="Yanlış"
+              style="width: 150px;"
+              min="1"
+              max="20"
+              maxlength="2"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="yabnet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              name="yabpuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 15px; font-weight: 600;">TOPLAM</td>
+          <td>
+            <input
+              type="number"
+              name="tpd"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="tpy"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="tpnet"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              name="tppuan"
+              readonly
+              style="text-align: center;"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align: right;">
+            <input
+              type="submit"
+              onclick="javascript:lgsHesapla()"
+              value="Hesapla"
+            />
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Not: Hesaplama katsayıları ortalama değerler olup, MEB tarafından
+      açıklanacak puanlar esastır.
+    </p>
+  </body>
+  <script>
+    function getFirstElementByName(name) {
+      var elements = document.getElementsByName(name);
+      if (elements.length) {
+        return elements[0];
+      }
+      return null;
+    }
+
+    function getAsNumber(node) {
+      if (isNaN(node.value)) {
+        return 0;
+      }
+
+      return Number(node.value);
+    }
+
+    function netHesapla(dogru, yanlis, net) {
+      let result = getAsNumber(dogru) - getAsNumber(yanlis) * 0.33333333;
+      net.value = parseFloat(result).toFixed(2);
+    }
+
+    function topla(nodes, toplam, extra = 0) {
+      let total = 0;
+
+      for (let index = 0; index < nodes.length; index++) {
+        total += getAsNumber(nodes[index]);
+      }
+
+      total += extra;
+      toplam.value = parseFloat(total).toFixed(2);
+    }
+
+    function puanHesapla(net, puan, katsayi) {
+      let result = getAsNumber(net) * katsayi;
+      puan.value = parseFloat(result).toFixed(2);
+    }
+
+    function lgsHesapla() {
+      let td = getFirstElementByName("td");
+      let ty = getFirstElementByName("ty");
+      let tnet = getFirstElementByName("tnet");
+      let tpuan = getFirstElementByName("tpuan");
+      netHesapla(td, ty, tnet);
+      puanHesapla(tnet, tpuan, 3.6728);
+
+      let md = getFirstElementByName("md");
+      let my = getFirstElementByName("my");
+      let mnet = getFirstElementByName("mnet");
+      let mpuan = getFirstElementByName("mpuan");
+      netHesapla(md, my, mnet);
+      puanHesapla(mnet, mpuan, 4.9536);
+
+      let fd = getFirstElementByName("fd");
+      let fy = getFirstElementByName("fy");
+      let fnet = getFirstElementByName("fnet");
+      let fpuan = getFirstElementByName("fpuan");
+      netHesapla(fd, fy, fnet);
+      puanHesapla(fnet, fpuan, 4.0736);
+
+      let ind = getFirstElementByName("ind");
+      let iny = getFirstElementByName("iny");
+      let innet = getFirstElementByName("innet");
+      let inpuan = getFirstElementByName("inpuan");
+      netHesapla(ind, iny, innet);
+      puanHesapla(innet, inpuan, 1.686);
+
+      let dind = getFirstElementByName("dind");
+      let diny = getFirstElementByName("diny");
+      let dinnet = getFirstElementByName("dinnet");
+      let dinpuan = getFirstElementByName("dinpuan");
+      netHesapla(dind, diny, dinnet);
+      puanHesapla(dinnet, dinpuan, 1.881);
+
+      let yabd = getFirstElementByName("yabd");
+      let yaby = getFirstElementByName("yaby");
+      let yabnet = getFirstElementByName("yabnet");
+      let yabpuan = getFirstElementByName("yabpuan");
+      netHesapla(yabd, yaby, yabnet);
+      puanHesapla(yabnet, yabpuan, 1.633);
+
+      let tpnet = getFirstElementByName("tpnet");
+      topla([tnet, mnet, fnet, innet, dinnet, yabnet], tpnet);
+
+      let tpd = getFirstElementByName("tpd");
+      topla([td, md, fd, ind, dind, yabd], tpd);
+
+      let tpy = getFirstElementByName("tpy");
+      topla([ty, my, fy, iny, diny, yaby], tpy);
+
+      let tppuan = getFirstElementByName("tppuan");
+      topla([tpuan, mpuan, fpuan, inpuan, dinpuan, yabpuan], tppuan, 194);
+
+      return false;
+    }
+  </script>
+  <style>
+    input:read-only {
+      border: 0px;
+    }
+  </style>
+</html>
