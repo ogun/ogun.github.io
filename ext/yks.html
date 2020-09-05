@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>YKS Puan Hesaplama</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <main id="content" class="neve-main" role="main">
+            <div class="container-fluid single-page-container">
+                <div class="row">
+                    <div class="nv-single-page-wrap col">
+                        <div class="nv-content-wrap entry-content">
+                            <div data-elementor-type="wp-page" data-elementor-id="1010" class="elementor elementor-1010"
+                                data-elementor-settings="[]">
+                                <div class="elementor-inner">
+                                    <div class="elementor-section-wrap">
+                                        <section
+                                            class="elementor-element elementor-element-3822c743 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section"
+                                            data-id="3822c743" data-element_type="section">
+                                            <div class="elementor-container elementor-column-gap-default">
+                                                <div class="elementor-row">
+                                                    <div class="elementor-element elementor-element-6c719738 elementor-column elementor-col-100 elementor-top-column"
+                                                        data-id="6c719738" data-element_type="column">
+                                                        <div class="elementor-column-wrap  elementor-element-populated">
+                                                            <div class="elementor-widget-wrap">
+                                                                <div class="elementor-element elementor-element-729d6be4 elementor-widget elementor-widget-text-editor"
+                                                                    data-id="729d6be4" data-element_type="widget"
+                                                                    data-widget_type="text-editor.default">
+                                                                    <div class="elementor-widget-container">
+                                                                        <div
+                                                                            class="elementor-text-editor elementor-clearfix">
+                                                                            <p></p>
+                                                                            <div class="">
+                                                                                <h1>TYT-AYT (YKS) Puan Hesaplama</h1>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="column">
+                                                                                    <form
+                                                                                        action="javascript:hesaplama(); javascript:net_hesap();">
+                                                                                        <label for="fname">Diploma
+                                                                                            Notunuz:</label> <input
+                                                                                            id="diploma" name="diploma"
+                                                                                            type="number" /><br /><br />
+                                                                                        <h4>TYT Sınavı (YKS 1. Oturum)
+                                                                                        </h4>
+                                                                                        <table id="tableid">
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Doğru
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Yanlış
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Toplam
+                                                                                                        Netiniz</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Türkçe
+                                                                                                        (40)</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_tr_dogru"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="40" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_tr_ynls"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_tr_net"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="40" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Sosyal
+                                                                                                        Bilimler (20)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_sos_dogru"
+                                                                                                            class=""
+                                                                                                            max="20"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="20" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_sos_ynls"
+                                                                                                            class=""
+                                                                                                            max="20"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_sos_net"
+                                                                                                            class=""
+                                                                                                            max="20"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="20" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Matematik (40)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_mat_dogru"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="40" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_mat_ynls"
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_mat_net"
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="40" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Fen
+                                                                                                        Bilimleri (20)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_fen_dogru"
+                                                                                                            class=""
+                                                                                                            max="20"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="20" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_fen_ynls"
+                                                                                                            max="20"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_fen_net"
+                                                                                                            max="20"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="20" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h4>AYT Sınavı (YKS 2. Oturum)
+                                                                                        </h4>
+                                                                                        <h5>Türk Dili ve
+                                                                                            Edebiyatı/Sosyal Bilimler 1
+                                                                                        </h5>
+                                                                                        <table>
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Doğru
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Yanlış
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Toplam
+                                                                                                        Netiniz</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Türk
+                                                                                                        Dili ve
+                                                                                                        Edebiyatı (24)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_tde_dogru"
+                                                                                                            class=""
+                                                                                                            max="24"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="24" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_tde_ynls"
+                                                                                                            class=""
+                                                                                                            max="24"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_tde_net"
+                                                                                                            class=""
+                                                                                                            max="24"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="24" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Tarih-1 (10)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_trh1_dogru"
+                                                                                                            class=""
+                                                                                                            max="10"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="10" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_trh1_ynls"
+                                                                                                            class=""
+                                                                                                            max="10"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_trh1_net"
+                                                                                                            class=""
+                                                                                                            max="10"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="10" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Coğrafya-1 (6)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_cog1_dogru"
+                                                                                                            class=""
+                                                                                                            max="10"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="6" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_cog1_ynls"
+                                                                                                            class=""
+                                                                                                            max="10"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_cog1_net"
+                                                                                                            class=""
+                                                                                                            max="10"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="6" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h5>Sosyal Bilimler 2</h5>
+                                                                                        <table>
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Doğru
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Yanlış
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Toplam
+                                                                                                        Netiniz</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Tarih-2 (11)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_trh2_dogru"
+                                                                                                            class=""
+                                                                                                            max="11"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="11" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_trh2_ynls"
+                                                                                                            class=""
+                                                                                                            max="11"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_trh2_net"
+                                                                                                            class=""
+                                                                                                            max="11"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="11" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Coğrafya-2 (11)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_cog2_dogru"
+                                                                                                            class=""
+                                                                                                            max="11"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="11" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_cog2_ynls"
+                                                                                                            class=""
+                                                                                                            max="11"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_cog2_net"
+                                                                                                            class=""
+                                                                                                            max="11"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="11" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Felsefe (12)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_fel_dogru"
+                                                                                                            class=""
+                                                                                                            max="12"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="12" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_fel_ynls"
+                                                                                                            class=""
+                                                                                                            max="12"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_fel_net"
+                                                                                                            class=""
+                                                                                                            max="12"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="12" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Din
+                                                                                                        Kültürü (6)</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_din_dogru"
+                                                                                                            class=""
+                                                                                                            max="6"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="6" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_din_ynls"
+                                                                                                            class=""
+                                                                                                            max="6"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_din_net"
+                                                                                                            class=""
+                                                                                                            max="6"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="6" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h5>Matematik</h5>
+                                                                                        <table>
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Doğru
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Yanlış
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Toplam
+                                                                                                        Netiniz</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Matematik (40)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_mat_dogru"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="40" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_mat_ynls"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_mat_net"
+                                                                                                            class=""
+                                                                                                            max="40"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="40" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h5>Fen Bilimleri</h5>
+                                                                                        <table>
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Doğru
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Yanlış
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Toplam
+                                                                                                        Netiniz</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Fizik
+                                                                                                        (14)</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_fizik_dogru"
+                                                                                                            class=""
+                                                                                                            max="14"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="14" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_fizik_ynls"
+                                                                                                            class=""
+                                                                                                            max="14"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_fizik_net"
+                                                                                                            class=""
+                                                                                                            max="14"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="14" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Kimya
+                                                                                                        (13)</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_kim_dogru"
+                                                                                                            class=""
+                                                                                                            max="13"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="13" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_kim_ynls"
+                                                                                                            class=""
+                                                                                                            max="13"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_kim_net"
+                                                                                                            class=""
+                                                                                                            max="13"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="13" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Biyoloji (13)
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_bio_dogru"
+                                                                                                            class=""
+                                                                                                            max="13"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="13" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_bio_ynls"
+                                                                                                            class=""
+                                                                                                            max="13"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_bio_net"
+                                                                                                            class=""
+                                                                                                            max="13"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            step="any"
+                                                                                                            type="number"
+                                                                                                            value="13" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h5>Yabancı Dil Sınavı</h5>
+                                                                                        <table>
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Doğru
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Yanlış
+                                                                                                        Sayısı</th>
+                                                                                                    <th id="thid">Toplam
+                                                                                                        Netiniz</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Dil
+                                                                                                        (80)</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_dil_dogru"
+                                                                                                            class=""
+                                                                                                            max="80"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="80" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_dil_ynls"
+                                                                                                            class=""
+                                                                                                            max="80"
+                                                                                                            min="0"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_dil_net"
+                                                                                                            class=""
+                                                                                                            max="80"
+                                                                                                            min="0"
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="80" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </form>
+                                                                                </div>
+                                                                                <div class="column">
+                                                                                    <form
+                                                                                        action="javascript:hesaplama(); javascript:compute();">
+                                                                                        <h4>TYT Puanlarınız</h4>
+                                                                                        <table id="tableid">
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Ham
+                                                                                                        Puan</th>
+                                                                                                    <th id="thid">
+                                                                                                        Yerleştirme
+                                                                                                        Puanı</th>
+                                                                                                    <th id="thid">Daha
+                                                                                                        Önce
+                                                                                                        Yerleştiyseniz
+                                                                                                    </th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">TYT
+                                                                                                        Puanı</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_hampuan"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_yerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="tyt_beforeyerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h4>AYT Puanlarınız</h4>
+                                                                                        <table>
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Ham
+                                                                                                        Puan</th>
+                                                                                                    <th id="thid">
+                                                                                                        Yerleştirme
+                                                                                                        Puanı</th>
+                                                                                                    <th id="thid">Daha
+                                                                                                        Önce
+                                                                                                        Yerleştiyseniz
+                                                                                                    </th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">
+                                                                                                        Sayısal Puanınız
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_sayısal_hampuan"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_sayısal_yerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_sayısal_beforeyerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Sözel
+                                                                                                        Puanınız</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_sozel_hampuan"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_sozel_yerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_sozel_beforeyerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Eşit
+                                                                                                        Ağırlık Puanınız
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_ea_hampuan"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_ea_yerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_ea_beforeyerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <h4>Yabancı Dil Puanınız</h4>
+                                                                                        <table id="tableid">
+                                                                                            <thead id="theadid">
+                                                                                                <tr id="trid">
+                                                                                                    <th id="thid"> </th>
+                                                                                                    <th id="thid">Ham
+                                                                                                        Puan</th>
+                                                                                                    <th id="thid">
+                                                                                                        Yerleştirme
+                                                                                                        Puanı</th>
+                                                                                                    <th id="thid">Daha
+                                                                                                        Önce
+                                                                                                        Yerleştiyseniz
+                                                                                                    </th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody id="tbodyid">
+                                                                                                <tr id="trid">
+                                                                                                    <td id="tdid">Dil
+                                                                                                        Puanınız</td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_dil_hampuan"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_dil_yerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                    <td id="tdid"><input
+                                                                                                            id="ayt_dil_beforeyerlestirme"
+                                                                                                            class=""
+                                                                                                            readonly="readonly"
+                                                                                                            type="number"
+                                                                                                            value="0" />
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table> <button
+                                                                                            style="font-size: 16px;"
+                                                                                            name="hesap_buton"
+                                                                                            type="buttın">Hesapla</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                            <p>
+                                                                                <script>function net_hesap() {
+                                                                                        var tyt_tr_net_1 = document.getElementById("tyt_tr_dogru").value;
+                                                                                        tyt_tr_net_1 -= Number(document.getElementById("tyt_tr_ynls").value) / 4;
+                                                                                        document.getElementById("tyt_tr_net").value = tyt_tr_net_1;
+
+                                                                                        var tyt_mat_net_1 = document.getElementById("tyt_mat_dogru").value;
+                                                                                        tyt_mat_net_1 -= Number(document.getElementById("tyt_mat_ynls").value) / 4;
+                                                                                        document.getElementById("tyt_mat_net").value = tyt_mat_net_1;
+
+                                                                                        var tyt_sos_net_1 = document.getElementById("tyt_sos_dogru").value;
+                                                                                        tyt_sos_net_1 -= Number(document.getElementById("tyt_sos_ynls").value) / 4;
+                                                                                        document.getElementById("tyt_sos_net").value = tyt_sos_net_1;
+
+                                                                                        var tyt_fen_net_1 = document.getElementById("tyt_fen_dogru").value;
+                                                                                        tyt_fen_net_1 -= Number(document.getElementById("tyt_fen_ynls").value) / 4;
+                                                                                        document.getElementById("tyt_fen_net").value = tyt_fen_net_1;
+
+                                                                                        var ayt_tde_net_1 = document.getElementById("ayt_tde_dogru").value;
+                                                                                        ayt_tde_net_1 -= Number(document.getElementById("ayt_tde_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_tde_net").value = ayt_tde_net_1;
+
+                                                                                        var ayt_trh1_net_1 = document.getElementById("ayt_trh1_dogru").value;
+                                                                                        ayt_trh1_net_1 -= Number(document.getElementById("ayt_trh1_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_trh1_net").value = ayt_trh1_net_1;
+
+                                                                                        var ayt_cog1_net_1 = document.getElementById("ayt_cog1_dogru").value;
+                                                                                        ayt_cog1_net_1 -= Number(document.getElementById("ayt_cog1_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_cog1_net").value = ayt_cog1_net_1;
+
+                                                                                        var ayt_trh2_net_1 = document.getElementById("ayt_trh2_dogru").value;
+                                                                                        ayt_trh2_net_1 -= Number(document.getElementById("ayt_trh2_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_trh2_net").value = ayt_trh2_net_1;
+
+                                                                                        var ayt_cog2_net_1 = document.getElementById("ayt_cog2_dogru").value;
+                                                                                        ayt_cog2_net_1 -= Number(document.getElementById("ayt_cog2_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_cog2_net").value = ayt_cog2_net_1;
+
+                                                                                        var ayt_fel_net_1 = document.getElementById("ayt_fel_dogru").value;
+                                                                                        ayt_fel_net_1 -= Number(document.getElementById("ayt_fel_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_fel_net").value = ayt_fel_net_1;
+
+                                                                                        var ayt_din_net_1 = document.getElementById("ayt_din_dogru").value;
+                                                                                        ayt_din_net_1 -= Number(document.getElementById("ayt_din_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_din_net").value = ayt_din_net_1;
+
+                                                                                        var ayt_mat_net_1 = document.getElementById("ayt_mat_dogru").value;
+                                                                                        ayt_mat_net_1 -= Number(document.getElementById("ayt_mat_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_mat_net").value = ayt_mat_net_1;
+
+                                                                                        var ayt_fizik_net_1 = document.getElementById("ayt_fizik_dogru").value;
+                                                                                        ayt_fizik_net_1 -= Number(document.getElementById("ayt_fizik_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_fizik_net").value = ayt_fizik_net_1;
+
+                                                                                        var ayt_kim_net_1 = document.getElementById("ayt_kim_dogru").value;
+                                                                                        ayt_kim_net_1 -= Number(document.getElementById("ayt_kim_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_kim_net").value = ayt_kim_net_1;
+
+                                                                                        var ayt_bio_net_1 = document.getElementById("ayt_bio_dogru").value;
+                                                                                        ayt_bio_net_1 -= Number(document.getElementById("ayt_bio_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_bio_net").value = ayt_bio_net_1;
+
+                                                                                        var ayt_dil_net_1 = document.getElementById("ayt_dil_dogru").value;
+                                                                                        ayt_dil_net_1 -= Number(document.getElementById("ayt_dil_ynls").value) / 4;
+                                                                                        document.getElementById("ayt_dil_net").value = ayt_dil_net_1;
+
+
+                                                                                    }
+
+
+
+                                                                                    function temizle() {
+                                                                                        document.getElementById("tyt_tr_dogru").value = 40;
+                                                                                        document.getElementById("tyt_tr_ynls").value = 0;
+                                                                                        document.getElementById("tyt_tr_net").value = 40;
+
+                                                                                        document.getElementById("tyt_mat_dogru").value = 40;
+                                                                                        document.getElementById("tyt_mat_ynls").value = 0;
+                                                                                        document.getElementById("tyt_mat_net").value = 40;
+
+                                                                                        document.getElementById("tyt_sos_dogru").value = 20;
+                                                                                        document.getElementById("tyt_sos_ynls").value = 0;
+                                                                                        document.getElementById("tyt_sos_net").value = 20;
+
+                                                                                        document.getElementById("tyt_fen_dogru").value = 20;
+                                                                                        document.getElementById("tyt_fen_ynls").value = 0;
+                                                                                        document.getElementById("tyt_fen_net").value = 20;
+
+                                                                                        document.getElementById("ayt_tde_dogru").value = 24;
+                                                                                        document.getElementById("ayt_tde_ynls").value = 0;
+                                                                                        document.getElementById("ayt_tde_dogru").value = 24;
+
+                                                                                        document.getElementById("ayt_trh1_dogru").value = 10;
+                                                                                        document.getElementById("ayt_trh1_ynls").value = 0;
+                                                                                        document.getElementById("ayt_trh1_net").value = 10;
+
+                                                                                        document.getElementById("ayt_cog1_dogru").value = 6;
+                                                                                        document.getElementById("ayt_cog1_ynls").value = 0;
+                                                                                        document.getElementById("ayt_cog1_net").value = 6;
+
+                                                                                        document.getElementById("ayt_trh2_dogru").value = 11;
+                                                                                        document.getElementById("ayt_trh2_ynls").value = 0;
+                                                                                        document.getElementById("ayt_trh2_net").value = 11;
+
+                                                                                        document.getElementById("ayt_cog2_dogru").value = 11;
+                                                                                        document.getElementById("ayt_cog2_ynls").value = 0;
+                                                                                        document.getElementById("ayt_cog2_net").value = 11;
+
+                                                                                        document.getElementById("ayt_fel_dogru").value = 12;
+                                                                                        document.getElementById("ayt_fel_ynls").value = 0;
+                                                                                        document.getElementById("ayt_fel_net").value = 12;
+
+                                                                                        document.getElementById("ayt_din_dogru").value = 6;
+                                                                                        document.getElementById("ayt_din_ynls").value = 0;
+                                                                                        document.getElementById("ayt_din_net").value = 6;
+
+                                                                                        document.getElementById("ayt_mat_dogru").value = 40;
+                                                                                        document.getElementById("ayt_mat_ynls").value = 0;
+                                                                                        document.getElementById("ayt_mat_net").value = 40;
+
+                                                                                        document.getElementById("ayt_fizik_dogru").value = 14;
+                                                                                        document.getElementById("ayt_fizik_ynls").value = 0;
+                                                                                        document.getElementById("ayt_fizik_net").value = 14;
+
+                                                                                        document.getElementById("ayt_kim_dogru").value = 13;
+                                                                                        document.getElementById("ayt_kim_ynls").value = 0;
+                                                                                        document.getElementById("ayt_kim_net").value = 13;
+
+                                                                                        document.getElementById("ayt_bio_dogru").value = 13;
+                                                                                        document.getElementById("ayt_bio_ynls").value = 0;
+                                                                                        document.getElementById("ayt_bio_net").value = 13;
+
+                                                                                        document.getElementById("ayt_dil_dogru").value = 80;
+                                                                                        document.getElementById("ayt_dil_ynls").value = 0;
+                                                                                        document.getElementById("ayt_dil_net").value = 80;
+
+
+
+                                                                                        document.getElementById("tyt_hampuan").value = 0;
+                                                                                        document.getElementById("tyt_yerlestirme").value = 0;
+                                                                                        document.getElementById("tyt_beforeyerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_sayısal_hampuan").value = 0;
+                                                                                        document.getElementById("ayt_sayısal_yerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_sayısal_beforeyerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_sozel_hampuan").value = 0;
+                                                                                        document.getElementById("ayt_sozel_yerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_sozel_beforeyerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_ea_hampuan").value = 0;
+                                                                                        document.getElementById("ayt_ea_yerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_ea_beforeyerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_dil_hampuan").value = 0;
+                                                                                        document.getElementById("ayt_dil_yerlestirme").value = 0;
+                                                                                        document.getElementById("ayt_dil_beforeyerlestirme").value = 0;
+
+                                                                                    }
+
+                                                                                    function hesaplama() {
+                                                                                        net_hesap();
+                                                                                        var mk_tyt_tr = Number(document.getElementById("tyt_tr_dogru").value) + Number(document.getElementById("tyt_tr_ynls").value);
+                                                                                        var mk_tyt_sos = Number(document.getElementById("tyt_sos_dogru").value) + Number(document.getElementById("tyt_sos_ynls").value);
+                                                                                        var mk_tyt_mat = Number(document.getElementById("tyt_mat_dogru").value) + Number(document.getElementById("tyt_mat_ynls").value);
+                                                                                        var mk_tyt_fen = Number(document.getElementById("tyt_fen_dogru").value) + Number(document.getElementById("tyt_fen_ynls").value);
+
+                                                                                        var mk_ayt_tde = Number(document.getElementById("ayt_tde_dogru").value) + Number(document.getElementById("ayt_tde_ynls").value);
+                                                                                        var mk_ayt_trh1 = Number(document.getElementById("ayt_trh1_dogru").value) + Number(document.getElementById("ayt_trh1_ynls").value);
+                                                                                        var mk_ayt_cog1 = Number(document.getElementById("ayt_cog1_dogru").value) + Number(document.getElementById("ayt_cog1_ynls").value);
+
+                                                                                        var mk_ayt_trh2 = Number(document.getElementById("ayt_trh2_dogru").value) + Number(document.getElementById("ayt_trh2_ynls").value);
+                                                                                        var mk_ayt_cog2 = Number(document.getElementById("ayt_cog2_dogru").value) + Number(document.getElementById("ayt_cog2_ynls").value);
+                                                                                        var mk_ayt_fel = Number(document.getElementById("ayt_fel_dogru").value) + Number(document.getElementById("ayt_fel_ynls").value);
+                                                                                        var mk_ayt_din = Number(document.getElementById("ayt_din_dogru").value) + Number(document.getElementById("ayt_din_ynls").value);
+
+                                                                                        var mk_ayt_mat = Number(document.getElementById("ayt_mat_dogru").value) + Number(document.getElementById("ayt_mat_ynls").value);
+
+                                                                                        var mk_ayt_fizik = Number(document.getElementById("ayt_fizik_dogru").value) + Number(document.getElementById("ayt_fizik_ynls").value);
+                                                                                        var mk_ayt_kim = Number(document.getElementById("ayt_kim_dogru").value) + Number(document.getElementById("ayt_kim_ynls").value);
+                                                                                        var mk_ayt_bio = Number(document.getElementById("ayt_bio_dogru").value) + Number(document.getElementById("ayt_bio_ynls").value);
+
+                                                                                        var mk_ayt_dil = Number(document.getElementById("ayt_dil_dogru").value) + Number(document.getElementById("ayt_dil_ynls").value);
+
+                                                                                        var diplomapuan = Number(document.getElementById("diploma").value) * 0.6;
+                                                                                        //  alert(diplomapuan);
+                                                                                        var tyt_ham_puan;
+                                                                                        var tyt_yerlestirme_puan;
+                                                                                        var tyt_before_yerlestirme_puan;
+
+                                                                                        var say_ham_puan;
+                                                                                        var say_yerlestirme_puan;
+                                                                                        var say_before_yerlestirme_puan;
+
+                                                                                        var ea_ham_puan;
+                                                                                        var ea_yerlestirme_puan;
+                                                                                        var ea_before_yerlestirme_puan;
+
+                                                                                        var sozel_ham_puan;
+                                                                                        var sozel_yerlestirme_puan;
+                                                                                        var sozel_before_yerlestirme_puan;
+
+                                                                                        var dil_ham_puan;
+                                                                                        var dil_yerlestirme_puan;
+                                                                                        var dil_before_yerlestirme_puan;
+
+                                                                                        tyt_tr_net_1 = document.getElementById("tyt_tr_net").value;
+                                                                                        tyt_mat_net_1 = document.getElementById("tyt_mat_net").value;
+                                                                                        tyt_sos_net_1 = document.getElementById("tyt_sos_net").value;
+                                                                                        tyt_fen_net_1 = document.getElementById("tyt_fen_net").value;
+
+                                                                                        ayt_tde_net_1 = document.getElementById("ayt_tde_net").value;
+                                                                                        ayt_trh1_net_1 = document.getElementById("ayt_trh1_net").value;
+                                                                                        ayt_cog1_net_1 = document.getElementById("ayt_cog1_net").value;
+
+                                                                                        ayt_trh2_net_1 = document.getElementById("ayt_trh2_net").value;
+                                                                                        ayt_cog2_net_1 = document.getElementById("ayt_cog2_net").value;
+                                                                                        ayt_fel_net_1 = document.getElementById("ayt_fel_net").value;
+                                                                                        ayt_din_net_1 = document.getElementById("ayt_din_net").value;
+
+                                                                                        ayt_mat_net_1 = document.getElementById("ayt_mat_net").value;
+
+                                                                                        ayt_fizik_net_1 = document.getElementById("ayt_fizik_net").value;
+                                                                                        ayt_kim_net_1 = document.getElementById("ayt_kim_net").value;
+                                                                                        ayt_bio_net_1 = document.getElementById("ayt_bio_net").value;
+
+                                                                                        ayt_dil_net_1 = document.getElementById("ayt_dil_net").value;
+
+
+
+                                                                                        if (mk_tyt_tr > 40) {
+                                                                                            alert("TYT Türkçe toplam doğru ve yanlış sayısı 40 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_tyt_tr);
+                                                                                            document.getElementById("tyt_tr_dogru").value = 40;
+                                                                                            document.getElementById("tyt_tr_ynls").value = 0;
+                                                                                            document.getElementById("tyt_tr_net").value = 40;
+
+                                                                                        }
+                                                                                        else if (mk_tyt_sos > 20) {
+                                                                                            alert("TYT Sosyal Bilimler toplam doğru ve yanlış sayısı 20 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_tyt_sos);
+                                                                                            document.getElementById("tyt_sos_dogru").value = 20;
+                                                                                            document.getElementById("tyt_sos_ynls").value = 0;
+                                                                                            document.getElementById("tyt_sos_net").value = 20;
+                                                                                        }
+                                                                                        else if (mk_tyt_mat > 40) {
+                                                                                            alert("TYT Matematik toplam doğru ve yanlış sayısı 40 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_tyt_mat);
+                                                                                            document.getElementById("tyt_mat_dogru").value = 40;
+                                                                                            document.getElementById("tyt_mat_ynls").value = 0;
+                                                                                            document.getElementById("tyt_mat_net").value = 40;
+                                                                                        }
+
+                                                                                        else if (mk_tyt_fen > 20) {
+                                                                                            alert("TYT Fen Bilimleri toplam doğru ve yanlış sayısı 20 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_tyt_fen);
+                                                                                            document.getElementById("tyt_fen_dogru").value = 20;
+                                                                                            document.getElementById("tyt_fen_ynls").value = 0;
+                                                                                            document.getElementById("tyt_fen_net").value = 20;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_tde > 24) {
+                                                                                            alert("AYT Türk Dili ve Edebiyatı toplam doğru ve yanlış sayısı 24 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_tde);
+                                                                                            document.getElementById("ayt_tde_dogru").value = 24;
+                                                                                            document.getElementById("ayt_tde_ynls").value = 0;
+                                                                                            document.getElementById("ayt_tde_net").value = 24;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_trh1 > 10) {
+                                                                                            alert("AYT Tarih 1 toplam doğru ve yanlış sayısı 10 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_trh1);
+                                                                                            document.getElementById("ayt_trh1_dogru").value = 10;
+                                                                                            document.getElementById("ayt_trh1_ynls").value = 0;
+                                                                                            document.getElementById("ayt_trh1_net").value = 10;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_cog1 > 6) {
+                                                                                            alert("AYT Coğrafya 1 toplam doğru ve yanlış sayısı 6 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_cog1);
+                                                                                            document.getElementById("ayt_cog1_dogru").value = 6;
+                                                                                            document.getElementById("ayt_cog1_ynls").value = 0;
+                                                                                            document.getElementById("ayt_cog1_net").value = 6;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_trh2 > 11) {
+                                                                                            alert("AYT Tarih 2 toplam doğru ve yanlış sayısı 11 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_trh2);
+                                                                                            document.getElementById("ayt_trh2_dogru").value = 11;
+                                                                                            document.getElementById("ayt_trh2_ynls").value = 0;
+                                                                                            document.getElementById("ayt_trh2_net").value = 11;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_fel > 12) {
+                                                                                            alert("AYT Felsefe toplam doğru ve yanlış sayısı 12 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_fel);
+                                                                                            document.getElementById("ayt_fel_dogru").value = 12;
+                                                                                            document.getElementById("ayt_fel_ynls").value = 0;
+                                                                                            document.getElementById("ayt_fel_net").value = 12;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_din > 6) {
+                                                                                            alert("AYT Din Kültürü toplam doğru ve yanlış sayısı 6 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_din);
+                                                                                            document.getElementById("ayt_din_dogru").value = 6;
+                                                                                            document.getElementById("ayt_din_ynls").value = 0;
+                                                                                            document.getElementById("ayt_din_net").value = 6;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_mat > 40) {
+                                                                                            alert("AYT Matematik toplam doğru ve yanlış sayısı 40 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_mat);
+                                                                                            document.getElementById("ayt_mat_dogru").value = 40;
+                                                                                            document.getElementById("ayt_mat_ynls").value = 0;
+                                                                                            document.getElementById("ayt_mat_net").value = 40;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_fizik > 14) {
+                                                                                            alert("AYT Fizik toplam doğru ve yanlış sayısı 14 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_fizik);
+                                                                                            document.getElementById("ayt_fizik_dogru").value = 14;
+                                                                                            document.getElementById("ayt_fizik_ynls").value = 0;
+                                                                                            document.getElementById("ayt_fizik_net").value = 14;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_kim > 13) {
+                                                                                            alert("AYT Kimya toplam doğru ve yanlış sayısı 13 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_kim);
+                                                                                            document.getElementById("ayt_kim_dogru").value = 13;
+                                                                                            document.getElementById("ayt_kim_ynls").value = 0;
+                                                                                            document.getElementById("ayt_kim_net").value = 13;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_bio > 13) {
+                                                                                            alert("AYT Biyoloji toplam doğru ve yanlış sayısı 13 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_bio);
+                                                                                            document.getElementById("ayt_bio_dogru").value = 13;
+                                                                                            document.getElementById("ayt_bio_ynls").value = 0;
+                                                                                            document.getElementById("ayt_bio_net").value = 13;
+                                                                                        }
+
+                                                                                        else if (mk_ayt_dil > 80) {
+                                                                                            alert("AYT Yabancı Dil toplam doğru ve yanlış sayısı 80 soruyu geçemez! Girmiş olduğunuz toplam değer:" + mk_ayt_dil);
+                                                                                            document.getElementById("ayt_dil_dogru").value = 80;
+                                                                                            document.getElementById("ayt_dil_ynls").value = 0;
+                                                                                            document.getElementById("ayt_dil_net").value = 80;
+                                                                                        }
+
+                                                                                        else {
+                                                                                            tyt_ham_puan = (tyt_tr_net_1 * 3.3) + (tyt_mat_net_1 * 3.3) + (tyt_sos_net_1 * 3.4) + (tyt_fen_net_1 * 3.4) + 100;
+                                                                                            tyt_yerlestirme_puan = tyt_ham_puan + diplomapuan;
+                                                                                            tyt_before_yerlestirme_puan = tyt_ham_puan + diplomapuan / 2;
+
+                                                                                            document.getElementById("tyt_hampuan").value = tyt_ham_puan;
+                                                                                            document.getElementById("tyt_yerlestirme").value = tyt_yerlestirme_puan;
+                                                                                            document.getElementById("tyt_beforeyerlestirme").value = tyt_before_yerlestirme_puan;
+
+                                                                                            say_ham_puan = (((tyt_ham_puan - 100) * 40) / 100) + ((((Number(ayt_mat_net_1) + Number(ayt_fizik_net_1) + Number(ayt_kim_net_1) + Number(ayt_bio_net_1)) * 5) * 60) / 100) + 100;
+                                                                                            say_yerlestirme_puan = say_ham_puan + diplomapuan;
+                                                                                            say_before_yerlestirme_puan = say_ham_puan + diplomapuan / 2;
+
+                                                                                            document.getElementById("ayt_sayısal_hampuan").value = say_ham_puan;
+                                                                                            document.getElementById("ayt_sayısal_yerlestirme").value = say_yerlestirme_puan;
+                                                                                            document.getElementById("ayt_sayısal_beforeyerlestirme").value = say_before_yerlestirme_puan;
+
+                                                                                            ea_ham_puan = (((tyt_ham_puan - 100) * 40) / 100) + ((((Number(ayt_tde_net_1) + Number(ayt_trh1_net_1) + Number(ayt_cog1_net_1) + Number(ayt_mat_net_1)) * 5) * 60) / 100) + 100;
+                                                                                            ea_yerlestirme_puan = ea_ham_puan + diplomapuan;
+                                                                                            ea_before_yerlestirme_puan = ea_ham_puan + diplomapuan / 2;
+
+                                                                                            document.getElementById("ayt_ea_hampuan").value = ea_ham_puan;
+                                                                                            document.getElementById("ayt_ea_yerlestirme").value = ea_yerlestirme_puan;
+                                                                                            document.getElementById("ayt_ea_beforeyerlestirme").value = ea_before_yerlestirme_puan;
+
+                                                                                            soz_ham_puan = (((tyt_ham_puan - 100) * 40) / 100) + ((((Number(ayt_tde_net_1) + Number(ayt_trh1_net_1) + Number(ayt_cog1_net_1) + Number(ayt_trh2_net_1) + Number(ayt_cog2_net_1) + Number(ayt_fel_net_1) + Number(ayt_din_net_1)) * 5) * 60) / 100) + 100;
+                                                                                            soz_yerlestirme_puan = soz_ham_puan + diplomapuan;
+                                                                                            soz_before_yerlestirme_puan = soz_ham_puan + diplomapuan / 2;
+
+                                                                                            document.getElementById("ayt_sozel_hampuan").value = soz_ham_puan;
+                                                                                            document.getElementById("ayt_sozel_yerlestirme").value = soz_yerlestirme_puan;
+                                                                                            document.getElementById("ayt_sozel_beforeyerlestirme").value = soz_before_yerlestirme_puan;
+
+                                                                                            dil_ham_puan = (((tyt_ham_puan - 100) * 40) / 100) + ((((Number(ayt_dil_net_1)) * 5) * 60) / 100) + 100;
+                                                                                            dil_yerlestirme_puan = dil_ham_puan + diplomapuan;
+                                                                                            dil_before_yerlestirme_puan = dil_ham_puan + diplomapuan / 2;
+
+                                                                                            document.getElementById("ayt_dil_hampuan").value = dil_ham_puan;
+                                                                                            document.getElementById("ayt_dil_yerlestirme").value = dil_yerlestirme_puan;
+                                                                                            document.getElementById("ayt_dil_beforeyerlestirme").value = dil_before_yerlestirme_puan;
+
+                                                                                        }
+
+                                                                                    }
+
+
+                                                                                    function compute() {
+
+                                                                                    }
+                                                                                    function round(value, precision) {
+                                                                                        var multiplier = Math.pow(10, precision || 0);
+                                                                                        return Math.round(value * multiplier) / multiplier;
+                                                                                    }</script>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
