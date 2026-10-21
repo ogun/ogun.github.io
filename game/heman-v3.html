@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HeMan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Chakra+Petch:wght@600;700&display=swap">
+<style>
+:root{--bg:#e4dccb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1215}}
+:root[data-theme="dark"]{--bg:#0e1215}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{display:grid;place-items:center;overflow:hidden;background:var(--bg);overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:"Chakra Petch",system-ui,sans-serif}
+[hidden]{display:none!important}
+#dev{container-type:inline-size;display:grid;width:min(94vw,calc((100vh - 24px)*.66),560px);width:min(94vw,calc((100dvh - 24px)*.66),560px);aspect-ratio:.66}
+#in{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:3cqw;padding:5.5cqw 6cqw 6cqw;border-radius:9cqw 9cqw 15cqw 15cqw;background:linear-gradient(165deg,#1a8b8f,#0b5558);box-shadow:inset 0 .7cqw 0 rgba(255,255,255,.28),inset 0 -1.4cqw 2.4cqw rgba(0,0,0,.32),0 3cqw 7cqw rgba(0,0,0,.4)}
+h1{margin:0;font:400 9.5cqw/1 Bungee,Impact,sans-serif;color:#f6e7bd;text-shadow:.6cqw .6cqw 0 #e0701f}
+#lcd{position:relative;width:100%;box-sizing:border-box;padding:2cqw;border-radius:2.6cqw;background:#0f1518;box-shadow:0 .5cqw 0 rgba(255,255,255,.2)}
+#lcd svg{display:block;width:100%;height:auto;border-radius:1.2cqw}
+#lcd::after{content:"";position:absolute;inset:2cqw;z-index:2;border-radius:1.2cqw;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.26),rgba(255,255,255,0) 40%);box-shadow:inset 0 1cqw 1.6cqw rgba(0,0,0,.3)}
+#fg{filter:drop-shadow(.9px 1.3px .5px rgba(70,45,20,.35))}
+.g{opacity:.1}.g.on{opacity:1}
+.sg{fill:#15181d;opacity:.08}.sg.on{opacity:1}
+.p{opacity:0}.p.on{opacity:1}
+.lb{font:700 9px "Chakra Petch",sans-serif;fill:#2c2f2a;opacity:.72}
+@keyframes bk{50%{opacity:.1}}
+.blink{animation:bk .5s steps(1) infinite}
+@media(prefers-reduced-motion:reduce){.blink{animation:none}}
+#ov{position:absolute;inset:2cqw;z-index:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2cqw;padding:4cqw;box-sizing:border-box;text-align:center;border-radius:1.2cqw;background:rgba(211,217,192,.95);color:#15181d;font:600 3.9cqw/1.45 "Chakra Petch",sans-serif;white-space:pre-line}
+#ot{font:400 7cqw/1.1 Bungee,Impact,sans-serif}
+#om{margin:0}
+#ctl{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:auto}
+.ar{width:24cqw;height:24cqw;border:0;padding:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;background:radial-gradient(circle at 35% 28%,#ffa763,#e8631c 58%,#b9460f);box-shadow:0 1.3cqw 0 #7b2d08,0 2.2cqw 2.6cqw rgba(0,0,0,.4),inset 0 .5cqw .7cqw rgba(255,255,255,.45)}
+.ar:active{transform:translateY(1cqw);box-shadow:0 .3cqw 0 #7b2d08,0 .6cqw 1cqw rgba(0,0,0,.4),inset 0 .5cqw .7cqw rgba(255,255,255,.45)}
+.ar svg{width:8cqw;height:8cqw;fill:#3a1405}
+#mid{display:flex;flex-direction:column;gap:2.6cqw}
+.pl{width:26cqw;height:8.4cqw;border:0;padding:0;border-radius:4.2cqw;cursor:pointer;touch-action:manipulation;background:#f1e4c0;color:#143133;font:700 3.8cqw "Chakra Petch",sans-serif;box-shadow:0 .9cqw 0 #a99b72,0 1.6cqw 1.6cqw rgba(0,0,0,.3)}
+.pl:active{transform:translateY(.7cqw);box-shadow:0 .2cqw 0 #a99b72}
+button:focus-visible{outline:.8cqw solid #fff;outline-offset:.6cqw}
+</style>
+</head>
+<body>
+<main id="dev"><div id="in">
+ <h1>HeMan</h1>
+ <div id="lcd">
+  <svg viewBox="0 0 300 330" role="img" aria-label="LCD ekran">
+   <defs>
+    <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6e9be"/><stop offset=".8" stop-color="#f2bd90"/></linearGradient>
+    <symbol id="B" viewBox="0 0 20 26">
+     <path d="M10 1C14.6 1 17.6 4.6 17.6 9.2 17.6 14.2 13.8 18 10 18.4 6.2 18 2.4 14.2 2.4 9.2 2.4 4.6 5.4 1 10 1Z" fill="#d83a30" stroke="#15181d" stroke-width="1.2"/>
+     <path d="M8.4 20.4 10 18l1.6 2.4z" fill="#15181d"/>
+     <path d="M10 20.4Q8 23 10 25.4" fill="none" stroke="#15181d" stroke-width=".9"/>
+     <ellipse cx="6.6" cy="6.2" rx="1.6" ry="2.4" fill="#fff" opacity=".7" transform="rotate(25 6.6 6.2)"/>
+    </symbol>
+    <symbol id="T" viewBox="0 0 20 18"><path d="M10 17C2 11 0 7 0 4.5 0 2 2 0 4.5 0 7 0 9 1.5 10 3.5 11 1.5 13 0 15.5 0 18 0 20 2 20 4.5 20 7 18 11 10 17Z" transform="translate(.6 .6) scale(.94)" fill="#d83a30" stroke="#15181d" stroke-width="1.2"/></symbol>
+    <symbol id="P" viewBox="0 0 22 22"><path d="M11 .8l2.4 6.6 6.6-2.4-3.6 6 5.8 3.6-6.8.6.6 6.8-5-4.6-5 4.6.6-6.8L1.8 14.6l5.8-3.6-3.6-6 6.6 2.4z" fill="#f0b82e" stroke="#15181d" stroke-width="1.1" stroke-linejoin="round"/></symbol>
+    <symbol id="H" viewBox="0 0 56 68" stroke="#15181d" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round">
+     <path d="M26.3 5 28 .6 29.7 5v11h-3.4z" fill="#dfe6ec"/>
+     <rect x="22" y="16" width="12" height="2.8" rx="1" fill="#15181d"/>
+     <rect x="27" y="18.8" width="2" height="4" fill="#15181d"/>
+     <g fill="none"><path d="M12 40Q3 30 24.5 22.8" stroke-width="8"/><path d="M44 40Q53 30 31.5 22.8" stroke-width="8"/></g>
+     <g fill="none" stroke="#e9c49c"><path d="M12 40Q3 30 24.5 22.8" stroke-width="5.4"/><path d="M44 40Q53 30 31.5 22.8" stroke-width="5.4"/></g>
+     <circle cx="25" cy="21" r="2.8" fill="#e9c49c"/><circle cx="31" cy="21" r="2.8" fill="#e9c49c"/>
+     <path d="M12 38h32l-6 15H18z" fill="#e9c49c"/>
+     <path d="M16 38 38 53M40 38 18 53" fill="none" stroke-width="2.4"/>
+     <circle cx="28" cy="45.5" r="2.3" fill="#f0b82e"/>
+     <rect x="17" y="52" width="22" height="3.2" fill="#15181d"/>
+     <path d="M17 55h22l-3 6-8 2-8-2z" fill="#5a3b24"/>
+     <path d="M19 61h8v4h-8zM29 61h8v4h-8z" fill="#e9c49c"/>
+     <path d="M17.5 64.5H28V68H17.5zM28 64.5h10.5V68H28z" fill="#15181d"/>
+     <circle cx="28" cy="31" r="8.2" fill="#f0c02e"/>
+     <ellipse cx="28" cy="32.6" rx="5" ry="5.4" fill="#e9c49c"/>
+     <path d="M20 30Q28 23.6 36 30Q28 27.6 20 30z" fill="#f0c02e"/>
+     <circle cx="26" cy="32.6" r=".8" fill="#15181d" stroke="none"/><circle cx="30" cy="32.6" r=".8" fill="#15181d" stroke="none"/>
+    </symbol>
+   </defs>
+   <rect width="300" height="330" fill="url(#sk)"/>
+   <circle cx="150" cy="232" r="60" fill="#f9d98a" opacity=".8"/>
+   <path d="M0 270 38 232 72 258 112 220 150 256 192 214 234 252 268 230 300 256V330H0Z" fill="#d3b8c4"/>
+   <g fill="#b99dbb"><rect x="114" y="228" width="20" height="44"/><rect x="166" y="228" width="20" height="44"/><rect x="132" y="214" width="36" height="58"/><path d="M112 228l12-16 12 16zM164 228l12-16 12 16zM130 214l20-24 20 24z"/></g>
+   <rect y="300" width="300" height="30" fill="#bcb682"/>
+   <text class="lb" x="14" y="16">Level</text><text class="lb" x="104" y="16">Can</text><text class="lb" x="206" y="16">Puan</text>
+   <g id="fg"></g>
+  </svg>
+  <div id="ov"><b id="ot"></b><p id="om"></p></div>
+ </div>
+ <div id="ctl">
+  <button class="ar" id="bl" aria-label="Sol"><svg viewBox="0 0 10 10"><path d="M8 1 2 5l6 4z"/></svg></button>
+  <div id="mid"><button class="pl" id="go">Başla</button><button class="pl" id="sn">Ses açık</button></div>
+  <button class="ar" id="br" aria-label="Sağ"><svg viewBox="0 0 10 10"><path d="M2 1l6 4-6 4z"/></svg></button>
+ </div>
+</div></main>
+<script>
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.append(e);return e};
+// LCD'deki sabit konumlar: 5 sütun, 4 balon satırı (0 = en alt), 5 kahraman durağı
+const CXs=[40,95,150,205,260],RYs=[236,186,136,86],WX=[0,4,-4,0];
+const SOZ=['Hiç hakkın kalmamış ki, sen şimdi bitirdin mi sanıyorsun ?','Bir hakkın kalmış aslında zor kurtarmışsın paçayı.','Bir kerecik yanmışsın olsun ziyanı yok.','Hiç yanmamışsın büyük adamsın walla.'];
+const HELP='Balonları kılıçla patlat, yere düşürme.\nSol / Sağ tuşlarıyla yürü.\nHer level 1 dakika, oyun 9 level.\nBol Şanslar !';
+const PAUSE=['Duraklatıldı','Devam etmek için Devam’a bas.'];
+// 7 segmentli rakamlar
+const HP='M1.2 1.2 2.4 0h7.2l1.2 1.2-1.2 1.2H2.4z',VP='M1.2 1.4 2.4 2.6v5.8L1.2 9.6 0 8.4V2.6z';
+const SEGS=[['a',HP,0,0],['b',VP,9.6,0],['c',VP,9.6,8.8],['d',HP,0,17.6],['e',VP,0,8.8],['f',VP,0,0],['g',HP,0,8.8]];
+const DG=['abcdef','bc','abdeg','abcdg','bcfg','acdfg','acdefg','abc','abcdefg','abcdfg'];
+const fg=$('#fg');
+function digits(n,x,y,gap){return Array.from({length:n},(_,i)=>{const g=el('g',{transform:`translate(${x+i*gap} ${y})`},fg);return SEGS.map(([k,d,dx,dy])=>({k,e:el('path',{d,class:'sg',transform:`translate(${dx} ${dy})`},g)}))})}
+function setNum(ds,v){const s=String(v).padStart(ds.length,'0').slice(-ds.length);ds.forEach((d,i)=>{const on=i===ds.length-1||+s.slice(0,i+1)>0?DG[+s[i]]:'';d.forEach(o=>o.e.classList.toggle('on',on.includes(o.k)))})}
+const dSc=digits(5,206,22,17),dLv=digits(1,14,22,17);
+const BL=CXs.map(cx=>RYs.map((ry,r)=>el('use',{href:'#B',x:cx+WX[r]-10,y:ry-13,width:20,height:26,class:'g'},fg)));
+const HR=CXs.map(cx=>el('use',{href:'#H',x:cx-28,y:262,width:56,height:68,class:'g'},fg));
+const HT=[0,1,2].map(i=>el('use',{href:'#T',x:104+i*30,y:22,width:20,height:18,class:'g'},fg));
+const PP=CXs.map(cx=>el('use',{href:'#P',x:cx-11,y:234,width:22,height:22,class:'p'},fg));
+let lvl,lives,score,hc,bs,iT,iR,tT,tR,tL,run=false,paused=false,started=false,pz=0,ovT=0,last=0,snd=true,ac;
+const pops=[0,0,0,0,0];
+function beep(f,d=.08,ty='square',v=.04,w=0){if(!snd)return;try{ac=ac||new AudioContext();if(ac.state==='suspended')ac.resume();const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+w;o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d)}catch(e){}}
+function draw(){
+ const n=performance.now();
+ BL.forEach((col,c)=>col.forEach((e,r)=>e.classList.toggle('on',bs[c]===r)));
+ HR.forEach((e,c)=>e.classList.toggle('on',hc===c));
+ HT.forEach((e,i)=>e.classList.toggle('on',i<lives));
+ PP.forEach((e,c)=>e.classList.toggle('on',pops[c]>n));
+ setNum(dSc,score);setNum(dLv,lvl);
+}
+function reset(){lvl=1;lives=3;score=0;hc=2;bs=[-1,-1,-1,-1,-1];iT=1100;iR=1350;tT=tR=tL=0;pops.fill(0);draw()}
+function ui(){$('#go').textContent=!run?(started?'Tekrar':'Başla'):pz===2?'Devam':'Duraklat'}
+// Mesaj paneli: auto verilirse o kadar ms sonra oyun kendiliğinden devam eder
+function show(t,m,auto){paused=true;pz=auto?1:2;$('#ot').textContent=t;$('#om').textContent=m;$('#ov').hidden=false;clearTimeout(ovT);if(auto)ovT=setTimeout(resume,auto);ui()}
+function resume(){clearTimeout(ovT);$('#ov').hidden=true;paused=false;pz=0;tT=tR=tL=0;pops.fill(0);HR.forEach(e=>e.classList.remove('blink'));draw();ui()}
+function start(){reset();started=true;run=true;resume();beep(880,.06)}
+function over(win){
+ run=false;bs.fill(-1);draw();
+ if(win){show('Şak Şak Şak Şak !','Şaka maka bitti oyun !\nSkor : '+score+'\n'+SOZ[lives]);[523,659,784,1047].forEach((f,i)=>beep(f,.16,'square',.04,i*.13))}
+ else{show('Yazık Yazık !','Buraya Kadarmış !\nSkor : '+score);[330,262,196].forEach((f,i)=>beep(f,.22,'sawtooth',.05,i*.2))}
+}
+// tmrtop: balonlar bir satır iner; en alttaki balon kılıca denk gelirse patlar, yoksa yere düşer
+function step(){
+ for(let c=0;c<5;c++){const r=bs[c];if(r<0)continue;
+  if(r>0){bs[c]=r-1;continue}
+  bs[c]=-1;
+  if(hc===c){score+=150;pops[c]=performance.now()+260;PP[c].setAttribute('y',234);setTimeout(draw,270);beep(1175,.07);beep(1568,.1,'square',.04,.07);continue}
+  if(lives===0)return over(false);
+  lives--;pops[c]=performance.now()+1600;PP[c].setAttribute('y',296);draw();
+  beep(150,.35,'sawtooth',.06);HR[hc].classList.add('blink');
+  return show('Kötü Haber ... !','N’oldu öldün galiba ?',1600);
+ }
+ draw();beep(300,.025,'square',.02);
+}
+function frame(t){
+ requestAnimationFrame(frame);
+ const d=Math.min(t-last,100);last=t;
+ if(!run||paused)return;
+ tT+=d;tR+=d;tL+=d;
+ if(tT>=iT){tT-=iT;step();if(paused||!run)return}
+ if(tR>=iR){tR-=iR;const a=Math.floor(Math.random()*5);if(bs[a]<0){bs[a]=3;draw()}}   // tmrrandom
+ if(tL>=6e4){tL-=6e4;if(lvl===9)return over(true);lvl++;iT-=100;iR-=100;draw();[523,659,784].forEach((f,i)=>beep(f,.1,'square',.04,i*.09))}   // tmrlevel
+}
+requestAnimationFrame(frame);
+function move(d){if(!run||paused)return;const n=Math.max(0,Math.min(4,hc+d));if(n!==hc){hc=n;beep(520,.04,'square',.03)}draw()}
+[['#bl',-1],['#br',1]].forEach(([s,d])=>{const b=$(s);b.onpointerdown=e=>{e.preventDefault();move(d)};b.onclick=e=>{if(!e.detail)move(d)}});
+$('#go').onclick=()=>{if(!run)start();else if(pz===2)resume();else if(!pz)show(...PAUSE)};
+function mute(){snd=!snd;$('#sn').textContent=snd?'Ses açık':'Ses kapalı'}
+$('#sn').onclick=mute;
+addEventListener('keydown',e=>{
+ const k=e.key,d=k==='ArrowLeft'||e.code==='KeyA'?-1:k==='ArrowRight'||e.code==='KeyD'?1:0;
+ if(d){e.preventDefault();move(d)}
+ else if(e.code==='KeyM')mute();
+ else if(e.code==='KeyP'||((k==='Enter'||k===' ')&&e.target.tagName!=='BUTTON')){e.preventDefault();$('#go').click()}
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&run&&!pz)show(...PAUSE)});
+reset();show('HeMan',HELP);$('#go').focus();
+</script>
+</body>
+</html>
