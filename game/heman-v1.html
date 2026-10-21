@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HeMan</title>
+<style>
+:root{--desk:#008080;--hint:#e6ffff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#004848;--hint:#9fd0d0}}
+:root[data-theme="dark"]{--desk:#004848;--hint:#9fd0d0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{position:relative;background:var(--desk);overflow:hidden;font:11px Tahoma,"MS Sans Serif",Arial,sans-serif;color:#000;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+#stage{position:absolute;left:50%;top:calc(50% - 12px);transform-origin:center}
+.win{width:460px;background:#c0c0c0;padding:3px;border:2px solid;border-color:#dfdfdf #000 #000 #dfdfdf;box-shadow:inset 1px 1px #fff,inset -1px -1px #808080}
+.tb{display:flex;align-items:center;gap:3px;height:18px;padding:0 2px;margin-bottom:3px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font-weight:bold}
+.tb span{flex:1}
+.tb img{width:16px;height:16px;image-rendering:pixelated}
+button{background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:inset -1px -1px #808080;font:inherit;cursor:pointer;padding:0}
+button:active:not(:disabled){border-color:#404040 #fff #fff #404040;box-shadow:inset 1px 1px #808080}
+button:disabled{color:#808080;cursor:default}
+button:focus-visible{outline:1px dotted #000;outline-offset:-5px}
+.tb button{width:16px;height:14px;font:bold 10px/1 Arial,sans-serif}
+#field{position:relative;width:460px;height:388px;background:#00c0c0;overflow:hidden;touch-action:none}
+.a{position:absolute}
+.s{position:absolute;image-rendering:pixelated;pointer-events:none}
+#bar{left:0;top:8px;width:460px;height:33px;background:#800000}
+.l,.v{position:absolute;top:8px;height:17px}
+.l{width:49px;text-align:right;font:bold 13px/17px Arial,sans-serif;color:#fff}
+.v{box-sizing:border-box;background:#fff;color:#000;text-align:center;font:12px/15px Arial,sans-serif;border:1px solid;border-color:#808080 #fff #fff #808080}
+.m{position:absolute;top:182px;width:65px;height:25px}
+#dlg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:290px;z-index:5}
+#dlg .win{width:auto}
+.bd{display:flex;gap:14px;align-items:center;min-height:48px;padding:16px 14px 8px;white-space:pre-line;line-height:1.4}
+.ic{flex:none;width:32px;height:32px;border-radius:50%;color:#fff;text-align:center;font:bold 22px/32px Arial,sans-serif}
+.ic.i{background:#0000c0;font:italic bold 22px/32px Georgia,serif}
+.ic.x{background:#c00000}
+#ok{display:block;margin:6px auto 8px;width:75px;height:23px}
+#ico{position:fixed;left:14px;top:calc(14px + env(safe-area-inset-top,0px));width:76px;background:none;border:0;box-shadow:none;color:#fff;text-align:center}
+#ico img{display:block;width:32px;height:32px;margin:0 auto 4px;image-rendering:pixelated}
+#ico b{font-weight:normal;padding:1px 2px}
+#ico:focus-visible{outline:none}
+#ico:focus-visible b{background:#000080;outline:1px dotted #ff0}
+#hint{position:fixed;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom,0px));margin:0;padding:0 12px;text-align:center;font-size:12px;color:var(--hint)}
+</style>
+</head>
+<body>
+<main id="stage">
+ <div class="win" id="win">
+  <div class="tb"><img id="ti" alt=""><span>HeMan</span><button disabled aria-label="Küçült">_</button><button disabled aria-label="Büyüt">□</button><button id="x" aria-label="Kapat">×</button></div>
+  <div id="field">
+   <div class="a" id="bar">
+    <b class="l" style="left:8px">Level :</b><b class="v" id="lv" style="left:64px;width:25px">1</b>
+    <img class="s" id="hr" alt="" style="left:176px;top:0;width:32px;height:32px">
+    <b class="l" style="left:206px;width:6px;text-align:center">:</b><b class="v" id="hk" style="left:214px;width:25px">3</b>
+    <b class="l" style="left:304px">Puan :</b><b class="v" id="pn" style="left:360px;width:73px">0</b>
+   </div>
+   <div id="menu">
+    <button class="m" id="bas" style="left:118px"><u>B</u>aşla</button>
+    <button class="m" id="yar" style="left:198px"><u>Y</u>ardım</button>
+    <button class="m" id="cik" style="left:278px">Çı<u>k</u>ış</button>
+   </div>
+   <div id="dlg" hidden role="alertdialog" aria-labelledby="dt" aria-describedby="dm">
+    <div class="win"><div class="tb"><span id="dt"></span></div>
+     <div class="bd"><div class="ic" id="di"></div><div id="dm"></div></div>
+     <button id="ok">Tamam</button></div>
+   </div>
+  </div>
+ </div>
+</main>
+<button id="ico" hidden><img id="ci" alt=""><b>He-Man.exe</b></button>
+<p id="hint">Ok tuşlarıyla oyna. Telefonda elin soluna ya da sağına dokun.</p>
+<script>
+const IMG={ball:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA6klEQVR42u1X0Q6EIAyjxP9mfPnuQRS4cGxwiDxAYmIisK4d2ME0D2LhO1p2Q3NQkqa2gYEqcLqpc/Ul3hfAtLGSBGc2RGyY4yONdC6FPSqy4WdwSjIGejI4wVyMkJoJisg1GWtAXEyKBTw6uAKEzTUPBcamn/ai0IC5w7rsVB05Af4vzTmwhtJ6ACcTvnSUKVZ7P8tcei/KkUhhzcvjGCgzqhKIlT+y6jWnIsjwugQbwAawAcy/C1a7ileRYJIMXHVGXyb0seC5SbW5h/fRqo62ZPf/0UvmdK4pXdGWL9GYzGvNVm9On2/PP9ro+ZR66nynAAAAAElFTkSuQmCC',heart:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAt0lEQVR42u2WSw7AIAhEO97/znTVxDaKDOInqWxbmCcRxuv6e0D5JuT/rlzUkhsVoAkzud9CIva2heQmtkB2QonIBVug1L6OXKQdpsB1+ijx5R04AFsAAIsu4BZj+ABM7UK+jvMOTIHQvGA4RMnESndgCETFQatjGAoB5Q2hTUEIBBovqdYYdkG0xK2b0AVhEWdWMQVhFWe9wATBiHvMSIVgxb1uWITwiPfY8QvCKx4R4nwUn9gnbvq3GV2HP+7KAAAAAElFTkSuQmCC',cloud:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABSUlEQVR42u1W0Q7DIAiEpf9l/6z3afhl7KHFUKuWdO3TesmyzIkcd0gkevHi38En/+uFmJ8IqFtXAIcAt8YBsqfEJx9shwNQALQsS/c0AGpEK2Jn+48ybwnVYGs9bIdpK7YH218rVaQeVXvQkrlUHInz+51a7C24hCjpVYCOJSKiRKT2ve4/lzMie8CSFZbc/IwQiRAN9EPpSgVA8zwboeJVS76f7z7z7loqABWRwlBEVESKGnfC8nkLdsk9zJq7EvtijcTwFqSUbrPArqHZXE/CJzzekbfEKSXKOT9HgJmbqqWUxrOi1wdXGmwE7z8R0aeW6A54if1azplE5DCKywxoedeSWEQOktZJ699+tvgZMJ3N7N6hrSoBlE/0HTHVCXrNYvL5ajpJePM49CDZjeJRL1Te6cUn3jBg+LKpvXvyUXpbdS9eRPAFeIjm2ouq6OYAAAAASUVORK5CYII=',hand:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA4UlEQVR42u1X0Q6EIAwr5P4LPn18We8FDEHjMRxcNC7xTW3XdlMA22K+ustbgpOEiEBDwuPP9RKAcQZIkiLSHcbHWEAAcM6pH/xcBc3aY5SAvzLzBbiulNJ0AjxhhRgjAHQvJK8E5lHXK0LYDVyrMHUKitckd+HL8s+ZgpTSBmphh9cC1/JqEz+qAEUEMcat41qFFQQO5a8XUFlCI5Z0EQghoKjQArfbcJoCIQRY74Bn/pCUych2OQsCziLtSxTQdn+rDPy0YaR71Y3KE485AeJkB0jzTbhVBpyx9Or3v0ezL6Feh6rmUmMUAAAAAElFTkSuQmCC'};
+const $=s=>document.querySelector(s);
+// Orijinal VB6 formundaki konumlar (twip/15 = piksel). Satır 0 = en alt.
+const LX=[[40,32,48,40],[128,136,120,136],[216,224,216,224],[304,304,312,304],[392,392,392,384]];
+const RY=[264,195,125,56],HX=[26,114,202,290,378],CX=[38,126,214,302,390];
+const SOZ=['Hiç hakkın kalmamış ki, sen şimdi bitirdin mi sanıyorsun ?','Bir hakkın kalmış aslında zor kurtarmışsın paçayı.','Bir kerecik yanmışsın olsun ziyanı yok.','Hiç yanmamışsın büyük adamsın walla.'];
+let lvl,lives,score,hc,bs,iT,iR,tT,tR,tL,run=false,paused=false,cb=null,last=0;
+$('#ti').src=$('#ci').src=IMG.ball;$('#hr').src=IMG.heart;
+const fld=$('#field');
+const mk=(src,x,y,w,hid)=>{const i=new Image();i.src=src;i.alt='';i.className='s';i.draggable=false;i.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${w}px`;i.hidden=!!hid;fld.insertBefore(i,$('#menu'));return i};
+CX.forEach(x=>mk(IMG.cloud,x,344,32));
+const bl=[0,1,2,3,4].map(()=>mk(IMG.ball,0,0,32,true));
+const hd=mk(IMG.hand,0,296,56);
+function draw(){
+ bl.forEach((e,c)=>{const r=bs[c];e.hidden=r<0;if(r>=0){e.style.left=LX[c][r]+'px';e.style.top=RY[r]+'px'}});
+ hd.style.left=HX[hc]+'px';
+ $('#lv').textContent=lvl;$('#hk').textContent=lives;$('#pn').textContent=score;
+}
+function reset(){lvl=1;lives=3;score=0;hc=2;bs=[-1,-1,-1,-1,-1];iT=1100;iR=1350;tT=tR=tL=0;draw()}
+function menu(){run=false;$('#menu').hidden=false;$('#bas').focus()}
+function dlg(t,m,k,f){paused=true;$('#dt').textContent=t;$('#dm').textContent=m;$('#di').className='ic '+k;$('#di').textContent=k==='i'?'i':'×';cb=f||null;$('#dlg').hidden=false;$('#ok').focus()}
+$('#ok').onclick=()=>{$('#dlg').hidden=true;paused=false;tT=tR=tL=0;const f=cb;cb=null;if(f)f()};
+function over(win){run=false;bs.fill(-1);draw();
+ if(win)dlg('Şak Şak Şak Şak !','Şaka maka bitti oyun !\nSkor : '+score+'\n'+SOZ[lives],'i',menu);
+ else dlg('Yazık Yazık !','Buraya Kadarmış !\nSkor : '+score,'x',menu)}
+// tmrtop: toplar bir satır iner; en alttaki top el ile yakalanır ya da kaçar
+function step(){
+ for(let c=0;c<5;c++){const r=bs[c];if(r<0)continue;
+  if(r>0){bs[c]=r-1;continue}
+  if(hc===c){score+=150;bs[c]=-1;continue}
+  if(lives===0)return over(false);
+  lives--;bs[c]=-1;draw();
+  return dlg('Kötü Haber ... !','N’oldu öldün galiba ?','x');
+ }
+ draw();
+}
+function frame(t){
+ requestAnimationFrame(frame);
+ const d=Math.min(t-last,100);last=t;
+ if(!run||paused)return;
+ tT+=d;tR+=d;tL+=d;
+ if(tT>=iT){tT-=iT;step();if(paused||!run)return}
+ if(tR>=iR){tR-=iR;const a=Math.floor(Math.random()*5);if(bs[a]<0){bs[a]=3;draw()}}   // tmrrandom
+ if(tL>=6e4){tL-=6e4;if(lvl===9)return over(true);lvl++;iT-=100;iR-=100;draw()}      // tmrlevel
+}
+requestAnimationFrame(frame);
+function move(d){if(!run||paused)return;hc=Math.max(0,Math.min(4,hc+d));draw()}
+$('#bas').onclick=()=>{reset();run=true;paused=false;$('#menu').hidden=true};
+$('#yar').onclick=()=>dlg('Yardım','<-   : Sol\n->   : Sağ\n\nHer level 1 dakikadır.\nOyun 9 leveldir.\n\nBol Şanslar !','i',()=>$('#yar').focus());
+function quit(){run=false;paused=false;$('#dlg').hidden=true;$('#win').hidden=true;$('#ico').hidden=false;$('#ico').focus()}
+$('#cik').onclick=$('#x').onclick=quit;
+$('#ico').onclick=()=>{$('#ico').hidden=true;$('#win').hidden=false;reset();menu()};
+addEventListener('keydown',e=>{
+ if(!$('#dlg').hidden){if(e.key==='Escape')$('#ok').click();return}
+ if(run){const d=e.key==='ArrowLeft'||e.code==='KeyA'?-1:e.key==='ArrowRight'||e.code==='KeyD'?1:0;if(d){e.preventDefault();move(d)}return}
+ if($('#win').hidden)return;
+ if(e.altKey){const b={KeyB:'#bas',KeyY:'#yar',KeyK:'#cik'}[e.code];if(b){e.preventDefault();$(b).click()}}
+ else if(e.key==='Escape')quit();
+ else if(e.key==='Enter'&&document.activeElement.tagName!=='BUTTON')$('#bas').click();
+});
+fld.addEventListener('pointerdown',e=>{if(!run||paused)return;const r=fld.getBoundingClientRect();move((e.clientX-r.left)*460/r.width<HX[hc]+28?-1:1)});
+const st=$('#stage');
+function fit(){const s=Math.max(.5,Math.min(innerWidth/494,(innerHeight-60)/440,3));st.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener('resize',fit);fit();
+reset();menu();
+</script>
+</body>
+</html>
