@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HN Hour Filter</title>
+  <style>
+:root {
+  --bg: #f6f6ef;
+  --card: #fff;
+  --text: #1c1c1c;
+  --muted: #828282;
+  --accent: #ff6600;
+  --border: #e2e2d8;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #161616; --card: #202020; --text: #e8e8e8; --muted: #9a9a9a; --border: #333; }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { margin: 0; font-size: 22px; }
+h1::before { content: "Y"; display: inline-block; width: 26px; height: 26px; margin-right: 10px; background: var(--accent); color: #fff; text-align: center; line-height: 26px; font-weight: 700; border-radius: 3px; }
+.sub { margin: 4px 0 20px; color: var(--muted); font-size: 13px; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px; }
+.group { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card); }
+.group button { border: 0; background: transparent; color: var(--text); padding: 7px 12px; cursor: pointer; font: inherit; border-right: 1px solid var(--border); }
+.group button:last-child { border-right: 0; }
+.group button:hover { background: rgba(255,102,0,.08); }
+.group button.active { background: var(--accent); color: #fff; }
+.sort { color: var(--muted); font-size: 13px; display: flex; gap: 6px; align-items: center; }
+select { font: inherit; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); }
+.reload { margin-left: auto; padding: 7px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); cursor: pointer; font: inherit; }
+.reload:hover { border-color: var(--accent); }
+
+.status { color: var(--muted); font-size: 13px; min-height: 20px; margin-bottom: 6px; }
+.status.error { color: #d33; }
+.progress { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 14px; }
+#bar { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; }
+.pts { text-align: center; color: var(--accent); font-weight: 700; font-size: 17px; line-height: 1.1; }
+.pts small { display: block; color: var(--muted); font-weight: 400; font-size: 11px; }
+.title { color: var(--text); text-decoration: none; font-weight: 600; }
+.title:hover { color: var(--accent); }
+.domain { color: var(--muted); font-size: 12px; margin-left: 6px; }
+.meta { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+.meta a { color: inherit; }
+.meta a:hover { color: var(--accent); }
+.age { font-weight: 600; color: var(--text); }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+@media (max-width: 480px) {
+  .reload { margin-left: 0; }
+  .item { grid-template-columns: 44px 1fr; padding: 10px; }
+}
+</style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>HN Top Stories by Age</h1>
+      <p class="sub">Last 24h · sorted by popularity · first <span id="pageCount">20</span> pages</p>
+    </header>
+
+    <section class="controls">
+      <div class="group" id="hourChips" role="group" aria-label="Hours">
+        <button data-h="1">1h</button>
+        <button data-h="2">2h</button>
+        <button data-h="3">3h</button>
+        <button data-h="4">4h</button>
+        <button data-h="6">6h</button>
+        <button data-h="12">12h</button>
+        <button data-h="24" class="active">24h</button>
+      </div>
+
+      <div class="group" id="modeToggle" role="group" aria-label="Mode">
+        <button data-mode="within" class="active" title="Posted at most N hours ago">Within last N h</button>
+        <button data-mode="bucket" title="Posted between N-1 and N hours ago">Only hour N</button>
+      </div>
+
+      <label class="sort">Sort
+        <select id="sortBy">
+          <option value="points">Points</option>
+          <option value="comments">Comments</option>
+          <option value="newest">Newest</option>
+        </select>
+      </label>
+
+      <button id="reload" class="reload">Reload</button>
+    </section>
+
+    <div id="status" class="status" role="status"></div>
+    <div class="progress"><div id="bar"></div></div>
+
+    <ol id="list" class="list"></ol>
+  </main>
+  <script>
+(() => {
+  "use strict";
+
+  const PAGES = 20;               // number of result pages to iterate (0..19)
+  const HITS_PER_PAGE = 30;       // same page size as hn.algolia.com
+  const WINDOW_SECONDS = 24 * 3600; // dateRange=last24h
+  const API = "https://hn.algolia.com/api/v1/search"; // /search = sort by popularity
+
+  const state = { stories: [], hours: 24, mode: "within", sort: "points", loadedAt: 0 };
+
+  const $ = (sel) => document.querySelector(sel);
+  const listEl = $("#list");
+  const statusEl = $("#status");
+  const barEl = $("#bar");
+
+  $("#pageCount").textContent = PAGES;
+
+  // ---------- data ----------
+  async function fetchPage(page, since) {
+    const params = new URLSearchParams({
+      tags: "story",
+      numericFilters: `created_at_i>${since}`,
+      hitsPerPage: HITS_PER_PAGE,
+      page,
+    });
+    const res = await fetch(`${API}?${params}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status} on page ${page}`);
+    return res.json();
+  }
+
+  async function loadAll() {
+    const since = Math.floor(Date.now() / 1000) - WINDOW_SECONDS;
+    state.stories = [];
+    setStatus("Loading…");
+    barEl.style.width = "0";
+    $("#reload").disabled = true;
+
+    let done = 0;
+    let totalPages = PAGES;
+    try {
+      // Fetch in small parallel batches to stay polite and show progress.
+      const BATCH = 5;
+      for (let start = 0; start < totalPages; start += BATCH) {
+        const pages = [];
+        for (let p = start; p < Math.min(start + BATCH, totalPages); p++) pages.push(p);
+        const results = await Promise.all(pages.map((p) => fetchPage(p, since)));
+        for (const r of results) {
+          totalPages = Math.min(PAGES, r.nbPages);   // API may have fewer pages
+          state.stories.push(...r.hits);
+          done++;
+        }
+        barEl.style.width = `${Math.min(100, (done / totalPages) * 100)}%`;
+        render();
+      }
+      // de-dupe (popularity ranking can shift between requests)
+      const seen = new Set();
+      state.stories = state.stories.filter((s) => !seen.has(s.objectID) && seen.add(s.objectID));
+      state.loadedAt = Date.now();
+      barEl.style.width = "100%";
+      render();
+    } catch (err) {
+      setStatus(`Error: ${err.message}`, true);
+    } finally {
+      $("#reload").disabled = false;
+    }
+  }
+
+  // ---------- filtering ----------
+  function ageHours(story) {
+    return (Date.now() / 1000 - story.created_at_i) / 3600;
+  }
+
+  function matches(story) {
+    const a = ageHours(story);
+    if (state.mode === "within") return a <= state.hours;
+    return a > state.hours - 1 && a <= state.hours; // exactly the Nth hour
+  }
+
+  function sorted(items) {
+    const by = {
+      points: (a, b) => (b.points || 0) - (a.points || 0),
+      comments: (a, b) => (b.num_comments || 0) - (a.num_comments || 0),
+      newest: (a, b) => b.created_at_i - a.created_at_i,
+    }[state.sort];
+    return items.slice().sort(by);
+  }
+
+  // ---------- rendering ----------
+  function fmtAge(story) {
+    const mins = Math.max(0, Math.round(ageHours(story) * 60));
+    if (mins < 60) return `${mins}m ago`;
+    const h = Math.floor(mins / 60), m = mins % 60;
+    return m ? `${h}h ${m}m ago` : `${h}h ago`;
+  }
+
+  function domainOf(url) {
+    try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return ""; }
+  }
+
+  function el(tag, props = {}, ...children) {
+    const node = document.createElement(tag);
+    Object.assign(node, props);
+    for (const c of children) node.append(c);
+    return node;
+  }
+
+  function render() {
+    const items = sorted(state.stories.filter(matches));
+    const label = state.mode === "within"
+      ? `posted within the last ${state.hours}h`
+      : `posted ${state.hours - 1}–${state.hours}h ago`;
+    setStatus(`${items.length} of ${state.stories.length} stories ${label}`);
+
+    listEl.replaceChildren();
+    if (!items.length) {
+      listEl.append(el("li", { className: "empty" }, "No stories match this filter."));
+      return;
+    }
+
+    const frag = document.createDocumentFragment();
+    for (const s of items) {
+      const hnUrl = `https://news.ycombinator.com/item?id=${s.objectID}`;
+      const url = s.url || hnUrl;
+      const dom = domainOf(s.url);
+
+      const pts = el("div", { className: "pts" }, String(s.points ?? 0), el("small", {}, "pts"));
+      const title = el("a", { className: "title", href: url, target: "_blank", rel: "noopener noreferrer" }, s.title || "(untitled)");
+      const titleRow = el("div", {}, title);
+      if (dom) titleRow.append(el("span", { className: "domain" }, `(${dom})`));
+
+      const meta = el("div", { className: "meta" },
+        el("span", { className: "age" }, fmtAge(s)),
+        ` · by ${s.author} · `,
+        el("a", { href: hnUrl, target: "_blank", rel: "noopener noreferrer" }, `${s.num_comments ?? 0} comments`)
+      );
+
+      frag.append(el("li", { className: "item" }, pts, el("div", {}, titleRow, meta)));
+    }
+    listEl.append(frag);
+  }
+
+  function setStatus(msg, isError = false) {
+    statusEl.textContent = msg;
+    statusEl.classList.toggle("error", isError);
+  }
+
+  // ---------- events ----------
+  function bindGroup(id, attr, onPick) {
+    $(id).addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      $(id).querySelectorAll("button").forEach((b) => b.classList.toggle("active", b === btn));
+      onPick(btn.dataset[attr]);
+      render();
+    });
+  }
+
+  bindGroup("#hourChips", "h", (v) => (state.hours = Number(v)));
+  bindGroup("#modeToggle", "mode", (v) => (state.mode = v));
+  $("#sortBy").addEventListener("change", (e) => { state.sort = e.target.value; render(); });
+  $("#reload").addEventListener("click", loadAll);
+
+  // keep "Xm ago" labels fresh
+  setInterval(() => { if (state.stories.length) render(); }, 60000);
+
+  loadAll();
+})();
+</script>
+</body>
+</html>
